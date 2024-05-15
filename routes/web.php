@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FaviconController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('layout_user');
 });
+
+Route::get('/change-favicon', [FaviconController::class, 'showForm'])->name('favicon.form');
+Route::post('/save-favicon', [FaviconController::class, 'saveFavicon'])->name('favicon.save');
+
+
+
