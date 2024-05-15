@@ -1,12 +1,12 @@
 @extends('layout_admin')
 
 @section('css')
-    <link rel="stylesheet" href="css/change_favicon.css">
+    <link rel="stylesheet" href="css/change_banner.css">
 @endsection
 
 @section('content')
     <div class="container">
-        <h1>Đổi Favicon</h1>
+        <h1>Đổi Banner</h1>
         @if (session('success'))
             <div class="alert alert-success">
                 {{ session('success') }}
@@ -29,15 +29,15 @@
             </div>
         @endif
 
-        <form action="{{ route('favicon.save') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('banner.save') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
-                <label for="favicon">Yêu cầu định dạng .png và dung lượng dưới 5MB. Ưu tiên ảnh có tỉ lệ 1:1 để hiển thị tốt nhất</label>
-                <input type="file" class="form-control" name="favicon" id="favicon" accept=".png" required
-                    onchange="previewFavicon(event)">
-                <div class="preview">
-                    <img class="mt-3" id="faviconPreview" alt="Favicon Preview">
-                </div>
+                <label for="banner">Yêu cầu định dạng .png và dung lượng dưới 5MB. Ưu tiên ảnh có tỉ lệ 9:16 để hiển thị tốt nhất</label>
+                <input type="file" class="form-control" name="banner" id="banner" accept=".png" required
+                    onchange="previewBanner(event)">
+                    <div class="preview">
+                        <img class="mt-3 w-50" id="bannerPreview" alt="Banner Preview">
+                    </div>
             </div>
             <button type="submit" class="btn btn-primary">Lưu</button>
         </form>
@@ -45,5 +45,5 @@
 @endsection
 
 @section('js')
-    <script src="/js/change_favicon.js"></script>
+    <script src="/js/change_banner.js"></script>
 @endsection
