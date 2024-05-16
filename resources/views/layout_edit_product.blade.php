@@ -21,7 +21,81 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     @yield('css')
-   
+    <style>
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="text"],
+        textarea,
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="file"] {
+            border: none;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .danhSach{
+        text-align: center;
+        margin-bottom: 20px ;
+    }
+   table thead tr th{
+        border: 1px solid #000;
+        text-align: center;
+    }
+    table tbody tr th {
+        border-left: 1px solid #000;
+        border-right: 1px solid #000;
+        font-weight: normal;
+        
+    }
+    table {
+        border: 1px solid #000;
+        margin-bottom: 70px ;
+    }
+    table tbody tr th a{
+        text-decoration: none;
+         color: black;
+       
+    }
+    .link {
+        text-align: center;
+        position: absolute;
+        /* top: 150%; */
+        left: 45%;
+
+    }
+    h3{
+        text-align: center;
+        color: red;
+    }
+    </style>
 
 </head>
 
@@ -82,18 +156,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                  
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -148,7 +211,43 @@
 
                 {{-- Code riêng ở đây --}}
                 @yield('content')
-                
+                <form action="{{ route('products.update', ['product' => $product->id, 'pageIndex' => $pageIndex]) }}" method="POST" enctype="multipart/form-data">
+                   @csrf
+                   {{-- @method('PUT') --}}
+                    <h3>Sửa sản phẩm</h3>
+                    <div class="form-group">
+                        <label for="product-code">ID</label>
+                        <input value='{{ $product->id }}' type="text" id="product-code" name="id" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-name">Tên sản phẩm</label>
+                        <input value='{{ $product->TenSp }}' type="text" id="product-name" name="TenSp" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-description">Mô tả sản phẩm</label>
+                        <textarea value='{{ $product->MoTa }}' id="product-description" name="MoTa" rows="4" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-price">Giá sản phẩm</label>
+                        <input value='{{ $product->Gia }}' type="number" id="product-price" name="Gia" step="0.01" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">Loại danh mục</label>
+                        <select id="category" name="LoaiDanhMuc" required>
+                            <option value="{{ $product->LoaiDanhMuc }}">{{ $product->LoaiDanhMuc }}</option>
+                            <option value="Rau">Rau</option>
+                            <option value="Củ">Củ</option>
+                            <option value="Quả">Quả</option>
+                            <option value="Đồ tươi">Đồ tươi</option>
+                            <option value="Đồ uống">Đồ uống</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="product-image">Ảnh mô tả sản phẩm</label>
+                        <input value='{{ $product->AnhMoTa }}' type="file" id="product-image" name="AnhMoTa" accept="image/*" required>
+                    </div>
+                    <button type="submit">Gửi</button>
+                </form>
 
             </div>
             <!-- End of Main Content -->
