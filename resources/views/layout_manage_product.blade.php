@@ -21,7 +21,113 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     @yield('css')
-   
+    <style>
+        form {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        textarea,
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="file"] {
+            border: none;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 25px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .danhSach {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .btn_add_product a {
+            color: white;
+            text-decoration: none;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 70px;
+        }
+
+        table thead th {
+            border: 1px solid #000;
+            text-align: center;
+            padding: 8px;
+        }
+
+        table tbody th,
+        table tbody td {
+            border-left: 1px solid #000;
+            border-right: 1px solid #000;
+            border-bottom: 1px solid #000;
+            text-align: center;
+            padding: 8px;
+        }
+
+        table tbody th:last-child,
+        table tbody td:last-child {
+            border-right: 1px solid #000;
+        }
+
+        table tbody tr th a {
+            text-decoration: none;
+            color: black;
+        }
+
+        .link {
+            text-align: center;
+            position: absolute;
+            left: 45%;
+        }
+
+        h3 {
+            text-align: center;
+            color: red;
+        }
+    </style>
 
 </head>
 
@@ -82,18 +188,7 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form
-                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                        <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small"
-                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="button">
-                                    <i class="fas fa-search fa-sm"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+
 
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
@@ -148,11 +243,88 @@
 
                 {{-- Code riêng ở đây --}}
                 @yield('content')
-                
+                <h5 class="danhSach">Danh sách sản phẩm hiện có</h5>
+                <button class="btn_add_product"><a href="layout_add_product">Thêm Sản Phẩm</a></button>
+                <main class="login-form">
+                    <div class="container">
+
+                        <div class="row justify-content-center">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Danh mục</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Ảnh</th>
+                                        <th>Mô tả</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                @foreach ($products as $item)
+                                    <tr>
+                                        <th>{{ $item->id }}</th>
+                                        <th>{{ $item->LoaiDanhMuc }}</th>
+                                        <th>{{ $item->TenSp }}</th>
+                                        <th>{{ $item->Gia }}</th>
+                                        <th>{{ $item->AnhMoTa }}</th>
+                                        <th>{{ $item->MoTa }}</th>
+                                        <td><a class="btn btn-success"
+                                                href="{{ route('products.show', ['product' => $item->id]) }}"><i
+                                                    class="fa-regular fa-eye"></i></a></td>
+                                        <td><a class="btn btn-danger"
+                                                href="{{ route('products.edit', ['product' => $item->id]) }}"><i
+                                                    class="fa-regular fa-pen-to-square"></i></a></td>
+                                        <td>
+                                            <button class="btn btn-warning" data-bs-toggle='modal'
+                                                data-bs-target='#A{{ $item->id }}'><i
+                                                    class="fa-regular fa-trash-can"></i></button>
+                                        </td>
+                                        <div class='modal fade' id='A{{ $item->id }}' tabindex='-1'
+                                            aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                            <div class='modal-dialog'>
+                                                <div class='modal-content'>
+                                                    <div class='modal-header'>
+                                                        <h1 class='modal-title fs-5' id='exampleModalLabel'>Xác nhận
+                                                            xóa</h1>
+                                                        <button type='button' class='btn-close'
+                                                            data-bs-dismiss='modal' aria-label='Close'></button>
+                                                    </div>
+                                                    <div class='modal-body'>
+                                                        Bạn có muốn xóa sản phẩm có id: {{ $item->id }}
+                                                    </div>
+                                                    <div class='modal-footer'>
+                                                        <button type='button' class='btn btn-secondary'
+                                                            data-bs-dismiss='modal'>Trở lại</button>
+                                                        <form
+                                                            action="{{ route('products.destroy', ['product' => $item->id]) }}"
+                                                            method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class='btn btn-primary'>Đồng
+                                                                ý</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </tr>
+                                @endforeach
+                            </table>
+                        </div>
+                        <div style="text-align: center;" class="link"></div>
+                    </div>
+                </main>
 
             </div>
             <!-- End of Main Content -->
 
+            <!-- Hiển thị liên kết phân trang -->
+            <div class="d-flex justify-content-center">
+                {{ $products->links() }}
+            </div>
         </div>
         <!-- End of Content Wrapper -->
 
