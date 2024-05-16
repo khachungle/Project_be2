@@ -10,26 +10,20 @@ use App\Models\Products;
 class ProductController extends Controller
 {
     //
-   
-    public function index(Request $request){
-        $numberOfRecord = Product::count();
-        $perPage = 8;
-        $numberOfPage = $numberOfRecord % $perPage == 0?
-             (int) ($numberOfRecord / $perPage): (int) ($numberOfRecord / $perPage) + 1;
-        $pageIndex = 1;
-        if($request->has('pageIndex'))
-            $pageIndex = $request->input('pageIndex');
-        if($pageIndex < 1) $pageIndex = 1;
-        if($pageIndex > $numberOfPage) $pageIndex = $numberOfPage;
-        //
-        $products = Product::orderByDesc('id')
-                ->skip(($pageIndex-1)*$perPage)
-                ->take($perPage)
-                ->get();  
-        // dd($arr);
-        return view('layout_manage_product', compact( 'products', 'numberOfPage', 'pageIndex'));
+    public function show(Request $request)
+    {
+        $products = Product::paginate(8); // Số người dùng trên mỗi trang là 3
+        // Trả về view 'user.list' và truyền biến $users vào view
+        return view('layout_product', compact('products'));
     }
-    public function store(Request $request){
+    public function index(Request $request)
+    {
+        $products = Product::paginate(8); // Số người dùng trên mỗi trang là 3
+        // Trả về view 'user.list' và truyền biến $users vào view
+        return view('layout_manage_product', compact('products'));
+    }
+    public function store(Request $request)
+    {
         Product::create($request->all());
         return redirect()->route('products.index')->with('mes', 'Thêm thành công');
     }
@@ -37,7 +31,7 @@ class ProductController extends Controller
     {
         // pageIndex
         $pageIndex = 1;
-        if($request->has('pageIndex')) $pageIndex = $request->input('pageIndex');
+        if ($request->has('pageIndex')) $pageIndex = $request->input('pageIndex');
         // show form edit
         $categorys = Category::all();
         return view('layout_edit_product', compact('product', 'categorys', 'pageIndex'));
@@ -50,7 +44,7 @@ class ProductController extends Controller
     {
         // pageIndex
         $pageIndex = 1;
-        if($request->has('pageIndex')) $pageIndex = $request->input('pageIndex');
+        if ($request->has('pageIndex')) $pageIndex = $request->input('pageIndex');
         // echo $pageIndex;
         // update
         $product->update($request->all());
@@ -60,7 +54,7 @@ class ProductController extends Controller
     {
         //
         $pageIndex = 1;
-        if($request->has('pageIndex'))  $pageIndex = $request->input('pageIndex');
+        if ($request->has('pageIndex'))  $pageIndex = $request->input('pageIndex');
         $product->delete();
         return redirect()->route('products.index', ['pageIndex' => $pageIndex])->with('mes', 'Xóa thành công');
     }

@@ -225,7 +225,7 @@
                     </div>
                     <div class="form-group">
                         <label for="product-description">Mô tả sản phẩm</label>
-                        <textarea value='{{ $product->MoTa }}' id="product-description" name="MoTa" rows="4" required></textarea>
+                        <input value='{{ $product->MoTa }}' id="product-description" name="MoTa" rows="4" required>
                     </div>
                     <div class="form-group">
                         <label for="product-price">Giá sản phẩm</label>

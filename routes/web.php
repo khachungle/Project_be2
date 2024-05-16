@@ -21,3 +21,4 @@ Route::get('/layout_add_product', function () {
 Route::get('/layout_add_category', function () {
     return view('layout_add_category');
 });
+Route::get('/layout_product', [ProductController::class, 'show']);

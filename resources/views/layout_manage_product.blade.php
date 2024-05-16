@@ -272,10 +272,10 @@
                                         <th>{{ $item->AnhMoTa }}</th>
                                         <th>{{ $item->MoTa }}</th>
                                         <td><a class="btn btn-success"
-                                                href="{{ route('products.show', ['product' => $item->id, 'pageIndex' => $pageIndex]) }}"><i
+                                                href="{{ route('products.show', ['product' => $item->id]) }}"><i
                                                     class="fa-regular fa-eye"></i></a></td>
                                         <td><a class="btn btn-danger"
-                                                href="{{ route('products.edit', ['product' => $item->id, 'pageIndex' => $pageIndex]) }}"><i
+                                                href="{{ route('products.edit', ['product' => $item->id]) }}"><i
                                                     class="fa-regular fa-pen-to-square"></i></a></td>
                                         <td>
                                             <button class="btn btn-warning" data-bs-toggle='modal'
@@ -299,7 +299,7 @@
                                                         <button type='button' class='btn btn-secondary'
                                                             data-bs-dismiss='modal'>Trở lại</button>
                                                         <form
-                                                            action="{{ route('products.destroy', ['product' => $item->id, 'pageIndex' => $pageIndex]) }}"
+                                                            action="{{ route('products.destroy', ['product' => $item->id]) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -320,29 +320,11 @@
 
             </div>
             <!-- End of Main Content -->
-            @if ($numberOfPage > 1)
-                <div class="d-flex justify-content-center align-items-center my-2">
-                    <a class="btn btn-success"
-                        href="{{ route('products.index', ['pageIndex' => $pageIndex - 1]) }}">Trước</a>
-                    @for ($i = 1; $i <= $numberOfPage; $i++)
-                        @if ($pageIndex == $i)
-                            <a class="btn btn-primary ms-2"
-                                href="{{ route('products.index', ['pageIndex' => $i]) }}">{{ $i }}</a>
-                        @else
-                            @if ($i == 1 || $i == $numberOfPage || ($i <= $pageIndex + 4 && $i >= $pageIndex - 4))
-                                <a class="btn btn-success ms-2"
-                                    href="{{ route('products.index', ['pageIndex' => $i]) }}">{{ $i }}</a>
-                            @elseif($i == $pageIndex - 5 || $i == $pageIndex + 5)
-                                <a class="btn btn-success ms-2"
-                                    href="{{ route('products.index', ['pageIndex' => $i]) }}">...</a>
-                            @endif
-                        @endif
-                    @endfor
-                    <a class="btn btn-success ms-2"
-                        href="{{ route('products.index', ['pageIndex' => $pageIndex + 1]) }}">Sau</a>
-                </div>
-            @endif
 
+            <!-- Hiển thị liên kết phân trang -->
+            <div class="d-flex justify-content-center">
+                {{ $products->links() }}
+            </div>
         </div>
         <!-- End of Content Wrapper -->
 

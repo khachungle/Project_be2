@@ -8,22 +8,9 @@ use Illuminate\Http\Request;
 class CategoryController extends Controller
 {
     public function index(Request $request){
-        $numberOfRecord = Category::count();
-        $perPage = 8;
-        $numberOfPage = $numberOfRecord % $perPage == 0?
-             (int) ($numberOfRecord / $perPage): (int) ($numberOfRecord / $perPage) + 1;
-        $pageIndex = 1;
-        if($request->has('pageIndex'))
-            $pageIndex = $request->input('pageIndex');
-        if($pageIndex < 1) $pageIndex = 1;
-        if($pageIndex > $numberOfPage) $pageIndex = $numberOfPage;
-        //
-        $categorys = Category::orderByDesc('id')
-                ->skip(($pageIndex-1)*$perPage)
-                ->take($perPage)
-                ->get();  
-        // dd($arr);
-        return view('layout_manage_category', compact( 'categorys', 'numberOfPage', 'pageIndex'));
+        $categorys = Category::paginate(8); // Số người dùng trên mỗi trang là 3
+        // Trả về view 'user.list' và truyền biến $users vào view
+        return view('layout_manage_category', compact('categorys'));
     }
     public function store(Request $request)
     {
