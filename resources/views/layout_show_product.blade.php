@@ -59,13 +59,13 @@
         <h2>Thông Tin Sản Phẩm</h2>
         <form action="submit_form.php" method="post" enctype="multipart/form-data">
             <label for="product-name">Tên Sản Phẩm: </label>
-            <input type="text" id="product-name" name="product-name" required value="{{ $product->TenSp }}">
+            <input type="text" id="product-name" name="product-name" required value="{{ $product->TenSp }}" disabled>
 
             <label for="price">Giá: </label>
-            <input type="number" id="price" name="price" required value="{{ $product->Gia }}">
+            <input type="number" id="price" name="price" required value="{{$product->Gia}} " disabled>
 
             <label for="description">Mô Tả:</label>
-            <input type="text" id="product-description" name="product-description" required value="{{ $product->MoTa }}">
+            <input type="text" id="product-description" name="product-description" required value="{{ $product->MoTa }}" disabled>
 
             <label for="image">Hình Ảnh:</label>
             <img class="img-fluid w-100" src="{{ asset($product->AnhMoTa) }}" alt="{{ $product->TenSp }}">

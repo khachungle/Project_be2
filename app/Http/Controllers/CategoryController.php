@@ -58,7 +58,7 @@ public function update(Request $request, $id)
     $category = Category::findOrFail($id);
     $category->TenDanhMuc = $request->input('TenDanhMuc');
     $category->save();
-    return redirect()->back()->with('success', 'Category added successfully!');
 
+    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
 }
 }
