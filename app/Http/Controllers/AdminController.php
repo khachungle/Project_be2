@@ -13,7 +13,7 @@ class AdminController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $orders = Order::all();
+        $orders = Order::paginate(10);
         return view('admin.orders', compact('orders'));
     }
 

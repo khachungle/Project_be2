@@ -33,6 +33,7 @@
                         <td colspan="6" class="text-center">Không có đơn hàng nào.</td>
                     </tr>
                 @endif
+                {{ $orders->links() }}
             </tbody>
         </table>
     </div>
