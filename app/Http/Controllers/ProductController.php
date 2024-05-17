@@ -15,9 +15,6 @@ class ProductController extends Controller
 
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $products = Product::all(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
         $categories = Category::all();
         // Đây là số trang hiện tại, nếu bạn cần phân trang
@@ -137,9 +134,6 @@ class ProductController extends Controller
     }
     public function show($id)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $product = Product::findOrFail($id);
         $categories = Category::all();
         return view('layout_show_product', compact('product', 'categories'));
@@ -148,18 +142,12 @@ class ProductController extends Controller
 
     public function indexProduct()
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $categories = Category::all();
         $products = Product::all();
         return view('layout_product', compact('categories', 'products'));
     }
     public function showByCategory($id)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         // Lấy danh mục theo ID
         $category = Category::find($id);
 
@@ -172,9 +160,6 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $keyword = $request->input('keyword');
 
         // Thực hiện tìm kiếm sản phẩm dựa trên từ khóa

@@ -10,18 +10,12 @@ class CartController extends Controller
 {
     public function index()
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $cart = session()->get('cart', []);
         return view('user.cart', compact('cart'));
     }
 
     public function add(Request $request, $id)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $product = Product::find($id);
 
         if (!$product) {
@@ -53,9 +47,6 @@ class CartController extends Controller
 
     public function update(Request $request, $id)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {
@@ -78,9 +69,6 @@ class CartController extends Controller
 
     public function remove(Request $request, $id)
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         $cart = session()->get('cart', []);
 
         if (isset($cart[$id])) {

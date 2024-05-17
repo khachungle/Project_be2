@@ -6,19 +6,21 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Factory as Faker;
 use App\Models\Category;
+use Illuminate\Support\Facades\DB;
 
 class CategorySeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        $f = Faker::create();
-        for ($i = 0; $i < 5; $i++) {
-            Category::create([
-                "TenDanhMuc" => $f->randomElement(['Rau','Củ','Quả','Đồ tươi','Đồ uống'])
-            ]);
-        }
+        DB::table('categories')->insert([
+            ['TenDanhMuc' => 'Rau', 'created_at' => now(), 'updated_at' => now()],
+            ['TenDanhMuc' => 'Củ', 'created_at' => now(), 'updated_at' => now()],
+            ['TenDanhMuc' => 'Quả', 'created_at' => now(), 'updated_at' => now()],
+            ['TenDanhMuc' => 'Đồ tươi', 'created_at' => now(), 'updated_at' => now()],
+            ['TenDanhMuc' => 'Đồ uống', 'created_at' => now(), 'updated_at' => now()],
+        ]);
     }
 }

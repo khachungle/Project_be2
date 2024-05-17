@@ -64,9 +64,6 @@ class AboutUsController extends Controller
 
     public function showAboutUs()
     {
-        if (!Auth::check()) {
-            return redirect('login');
-        }
         // Lấy thông tin "About Us" đầu tiên từ cơ sở dữ liệu
         $about = About::first();
 
