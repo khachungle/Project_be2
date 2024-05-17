@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link href="img/favicon.png" rel="icon">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
 
     <title>Foody - Admin</title>
 

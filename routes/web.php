@@ -3,7 +3,6 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
-<<<<<<< HEAD
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
@@ -58,4 +57,3 @@ Route::post('/save-favicon', [FaviconController::class, 'saveFavicon'])->name('f
 Route::get('/change-banner', [BannerController::class, 'showForm'])->name('banner.form');
 Route::post('/save-banner', [BannerController::class, 'saveBanner'])->name('banner.save');
 
->>>>>>> change-logo-banner

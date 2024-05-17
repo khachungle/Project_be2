@@ -9,7 +9,7 @@
     <meta content="" name="description">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Favicon -->
-    <link href="img/1715921645.png" rel="icon">
+    <link rel="icon" href="{{ asset('img/favicon.png') }}">
 
     <!-- Google Web Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
