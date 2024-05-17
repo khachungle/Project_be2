@@ -59,6 +59,6 @@ public function update(Request $request, $id)
     $category->TenDanhMuc = $request->input('TenDanhMuc');
     $category->save();
 
-    return redirect()->route('categories.index')->with('success', 'Category updated successfully!');
+    return redirect()->back();
 }
 }

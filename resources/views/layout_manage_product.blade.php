@@ -292,11 +292,10 @@
                                         <td>
                                             <form action="/products/{{ $item->id }}" method="POST">
                                                 @csrf
-                                                @method('DELETE')
                                                 <button type="submit">Xóa</button>
                                             </form>
                                         </td>
-                                        <!-- Modal xác nhận xóa -->
+                                        {{-- <!-- Modal xác nhận xóa -->
                                         <div class='modal fade' id='A{{ $item->id }}' tabindex='-1'
                                             aria-labelledby='exampleModalLabel' aria-hidden='true'>
                                             <!-- Nội dung modal -->
@@ -325,7 +324,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
                                     </tr>
                                 @endforeach
                             </table>

@@ -69,10 +69,6 @@
 
             <label for="image">Hình Ảnh:</label>
             <img class="img-fluid w-100" src="{{ asset($product->AnhMoTa) }}" alt="{{ $product->TenSp }}">
-
-           
-
-            
         </form>
     </div>
 </body>

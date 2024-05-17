@@ -97,8 +97,7 @@
 </head>
 
 <body>
-    <form  action="{{ route('products.update', $product->id) }}" method="POST"
-        enctype="multipart/form-data">
+    <form action="{{ route('products.update', $product->id) }}" method="POST" enctype="multipart/form-data">
         @csrf
         @method('PUT') <!-- Thêm dòng này để Laravel biết đây là phương thức PUT -->
         <h3>Sửa sản phẩm</h3>
@@ -129,7 +128,7 @@
         </div>
         <button type="submit">Gửi</button>
     </form>
-    
+
 </body>
 
 </html>
