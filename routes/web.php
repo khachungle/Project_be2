@@ -3,9 +3,12 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
+<<<<<<< HEAD
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\FaviconController;
+use App\Http\Controllers\BannerController;
 
 Route::get('/layout_admin', function(){
     return view('layout_admin');
@@ -46,3 +49,13 @@ Route::post('/checkout', [CheckoutController::class, 'store'])->name('checkout.s
 
 Route::get('admin/orders', [AdminController::class, 'orders'])->name('admin.orders');
 Route::get('/admin/orders/{id}', [AdminController::class, 'show'])->name('admin.order.show');
+
+// Đổi favicon
+Route::get('/change-favicon', [FaviconController::class, 'showForm'])->name('favicon.form');
+Route::post('/save-favicon', [FaviconController::class, 'saveFavicon'])->name('favicon.save');
+
+// Đổi banner
+Route::get('/change-banner', [BannerController::class, 'showForm'])->name('banner.form');
+Route::post('/save-banner', [BannerController::class, 'saveBanner'])->name('banner.save');
+
+>>>>>>> change-logo-banner

@@ -8,6 +8,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
+    <!-- Favicon -->
+    <link href="img/favicon.png" rel="icon">
+
     <title>Foody - Admin</title>
 
     {{-- icon Font Awesome --}}
