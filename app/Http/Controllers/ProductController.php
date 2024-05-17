@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\About;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Products;
@@ -153,6 +154,12 @@ class ProductController extends Controller
     }
 
     public function home(){
-        
+        $products = Product::orderBy('created_at', 'desc') // Sắp xếp theo thời gian tạo mới nhất
+                    ->take(8) // Giới hạn kết quả trả về cho 8 sản phẩm đầu tiên
+                    ->get();
+
+        $about= About::first();
+
+        return view('user.home', compact('products', 'about'));
     }
 }

@@ -22,9 +22,8 @@ use App\Http\Controllers\VoucherController;
 |
 */
 
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', [ProductController::class, 'home'])->name('user.home');
+
 Route::get('/layout_manage_product', [ProductController::class, 'index'])->name('products.index');
 Route::get('/layout_add_product', [ProductController::class, 'create1']);
 Route::post('/products/{id}', [ProductController::class, 'destroy'])->name('products.destroy');

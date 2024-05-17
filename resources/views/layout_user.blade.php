@@ -54,14 +54,10 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <div class="navbar-nav ms-auto p-4 p-lg-0">
-                    <a href="layout_user" class="nav-item nav-link active">Home</a>
-                    <a href="" class="nav-item nav-link">About Us</a>
-                    <a href="layout_products" class="nav-item nav-link">Products</a>
-                    <a href="" class="nav-item nav-link">Contact Us</a>
-                    <a href="index.html" class="nav-item nav-link active">Home</a>
-                    <a href="about_us" class="nav-item nav-link">About Us</a>
-                    <a href="product.html" class="nav-item nav-link">Products</a>
-                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
+                    <a href="{{ route('user.home') }}" class="nav-item nav-link">Home</a>
+                    <a href="{{ route('user.about_us') }}" class="nav-item nav-link">About Us</a>
+                    <a href="{{ route('home') }}" class="nav-item nav-link">Products</a>
+                    <a href="#" class="nav-item nav-link">Contact Us</a>
                 </div>
                 <div class="d-none d-lg-flex ms-2">
                     <a class="btn-sm-square bg-white rounded-circle ms-3" href="">
