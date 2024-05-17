@@ -211,16 +211,12 @@
 
                 {{-- Code riêng ở đây --}}
                 @yield('content')
-                <form action="{{ route('categorys.store') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ url('/categories') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h3>Thêm danh mục mới</h3>
                     <div class="form-group">
-                        <label for="product-code">ID</label>
-                        <input type="text" id="product-code" name="id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-name">Tên danh mục</label>
-                        <input type="text" id="product-name" name="TenDanhMuc" required>
+                        <label for="TenDanhMuc">Tên danh mục</label>
+                        <input type="text" id="TenDanhMuc" name="TenDanhMuc" required>
                     </div>
                     <button type="submit">Gửi</button>
                 </form>

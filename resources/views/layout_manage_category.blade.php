@@ -12,9 +12,7 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
     <link href="css/sb-admin-2.min.css" rel="stylesheet">
     @yield('css')
@@ -170,17 +168,13 @@
 
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item dropdown no-arrow d-sm-none">
-                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fas fa-search fa-fw"></i>
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
-                                aria-labelledby="searchDropdown">
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
                                 <form class="form-inline mr-auto w-100 navbar-search">
                                     <div class="input-group">
-                                        <input type="text" class="form-control bg-light border-0 small"
-                                            placeholder="Search for..." aria-label="Search"
-                                            aria-describedby="basic-addon2">
+                                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                                         <div class="input-group-append">
                                             <button class="btn btn-primary" type="button">
                                                 <i class="fas fa-search fa-sm"></i>
@@ -192,13 +186,11 @@
                         </li>
 
                         <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Username</span>
                                 <img class="img-profile rounded-circle" src="img/undraw_profile.svg" alt="ảnh">
                             </a>
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" href="#">
                                     <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Profile
@@ -217,7 +209,7 @@
 
                 <div class="header-container">
                     <h5 class="danhSach">Danh sách danh mục hiện có</h5>
-                    <button class="btn_add_category"><a href="layout_add_category">Thêm Danh Mục</a></button>
+                    <button class="btn_add_category"><a href="{{ url('/layout_add_category') }}">Thêm Danh Mục</a></button>
                 </div>
 
                 <main class="login-form">
@@ -230,60 +222,29 @@
                                         <th>Tên danh mục</th>
                                         <th></th>
                                         <th></th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($categorys as $item)
-                                        <tr>
-                                            <td>{{ $item->id }}</td>
-                                            <td>{{ $item->TenDanhMuc }}</td>
-                                            <td><a class="btn btn-success"
-                                                    href="{{ route('categorys.show', ['category' => $item->id]) }}"><i
-                                                        class="fa-regular fa-eye"></i></a></td>
-                                            <td><a class="btn btn-danger"
-                                                    href="{{ route('categorys.edit', ['category' => $item->id]) }}"><i
-                                                        class="fa-regular fa-pen-to-square"></i></a></td>
-                                            <td><button class="btn btn-warning" data-bs-toggle='modal'
-                                                    data-bs-target='#A{{ $item->id }}'><i
-                                                        class="fa-regular fa-trash-can"></i></button></td>
+                                @foreach ($categorys as $item)
+                                    <tr>
+                                        <td>{{$item -> id }}</td>
+                                        <td>{{$item -> TenDanhMuc }}</td>
+                                        <td><a href="{{ route('categories.edit', $item->id) }}">Sửa</a></td>
+                                        <td>
+                                    <form action="/categories/{{ $item->id }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit">Xóa</button>
+                                    </form>
+                    </td>
 
-
-                                            <!-- Modal -->
-                                            <div class='modal fade' id='A{{ $item->id }}' tabindex='-1'
-                                                aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                                <div class='modal-dialog'>
-                                                    <div class='modal-content'>
-                                                        <div class='modal-header'>
-                                                            <h1 class='modal-title fs-5' id='exampleModalLabel'>Xác
-                                                                nhận xóa</h1>
-                                                            <button type='button' class='btn-close'
-                                                                data-bs-dismiss='modal' aria-label='Close'></button>
-                                                        </div>
-                                                        <div class='modal-body'>
-                                                            Bạn có muốn đơn hàng có id: {{ $item->id }}
-                                                        </div>
-                                                        <div class='modal-footer'>
-                                                            <button type='button' class='btn btn-secondary'
-                                                                data-bs-dismiss='modal'>Trở lại</button>
-                                                            <form
-                                                                action="{{ route('categorys.destroy', ['category' => $item->id]) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class='btn btn-primary'>Đồng
-                                                                    ý</button>
-                                                            </form>
-
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </tr>
-                                    @endforeach
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
+                          <!-- Delete Confirmation Modal -->
+   
                         <div style="text-align: center;" class="link"></div>
                     </div>
                 </main>
@@ -295,8 +256,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -313,53 +273,7 @@
             </div>
         </div>
     </div>
-    <!-- Hiển thị liên kết phân trang -->
-    <div class="d-flex justify-content-center">
-        {{ $categorys->links() }}
-    </div>
 
-
-    <!-- modal inform -->
-
-
-    <div id="myDialog" style="display: none;" class="px-5 py-3 rounded-3">
-        <h4 class="text-primary fw-bold fs-4">Thông báo</h4>
-        <p class="text-success">{{ session('mes') }}</p>
-        <button id="confirmButton" class="float-end rounded-2">Đồng ý</button>
-    </div>
-    <style>
-        #myDialog {
-            position: fixed;
-            width: 500px;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: #ffffff;
-            padding: 20px;
-            border: 1px solid #ccc;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-        }
-
-        #confirmButton {
-            padding: 10px 20px;
-            background: #007bff;
-            color: #ffffff;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
-    @if (session('mes'))
-        <script>
-            var dialog = document.getElementById("myDialog");
-            var confirmButton = document.getElementById("confirmButton");
-
-            dialog.style.display = "block";
-            confirmButton.addEventListener("click", function() {
-                dialog.style.display = "none";
-            });
-            // alert("{{ session('Success') }}")
-        </script>
-    @endif
     <script src="vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 

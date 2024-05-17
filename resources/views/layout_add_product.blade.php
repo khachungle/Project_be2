@@ -212,82 +212,39 @@
                 {{-- Code riêng ở đây --}}
                 @yield('content')
                 <form action="{{ route('products.store') }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    <h3>Thêm sản phẩm mới</h3>
-                    <div class="form-group">
-                        <label for="product-code">ID</label>
-                        <input type="text" id="product-code" name="id" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-name">Tên sản phẩm</label>
-                        <input type="text" id="product-name" name="TenSp" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-description">Mô tả sản phẩm</label>
-                        <textarea id="product-description" name="MoTa" rows="4" required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-price">Giá sản phẩm</label>
-                        <input type="number" id="product-price" name="Gia" step="0.01" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="category">Loại danh mục</label>
-                        <select id="category" name="LoaiDanhMuc" required>
-                            <option value="Rau">Rau</option>
-                            <option value="Củ">Củ</option>
-                            <option value="Quả">Quả</option>
-                            <option value="Đồ tươi">Đồ tươi</option>
-                            <option value="Đồ uống">Đồ uống</option>
-                           
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="product-image">Ảnh mô tả sản phẩm</label>
-                        <input type="file" id="product-image" name="AnhMoTa" accept="image/*" required>
-                    </div>
-                    <button type="submit">Gửi</button>
-                </form>
+        @csrf
+        <h3>Thêm sản phẩm mới</h3>
+        <div class="form-group">
+            <label for="TenSP">Tên sản phẩm</label>
+            <input type="text" id="TenSP" name="TenSP" required>
+        </div>
+        <div class="form-group">
+            <label for="MoTa">Mô tả sản phẩm</label>
+            <textarea id="MoTa" name="MoTa" rows="4" required></textarea>
+        </div>
+        <div class="form-group">
+            <label for="Gia">Giá sản phẩm</label>
+            <input type="number" id="Gia" name="Gia" step="0.01" required>
+        </div>
+        <div class="form-group">
+            <label for="LoaiDanhMuc">Loại danh mục</label>
+            <select id="LoaiDanhMuc" name="LoaiDanhMuc" required>
+                <option value="">Chọn loại danh mục</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->TenDanhMuc }}</option>
+                @endforeach
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="AnhMoTa">Ảnh mô tả sản phẩm</label>
+            <input type="file" id="AnhMoTa" name="AnhMoTa" accept="image/*" required>
+        </div>
+        <button type="submit">Gửi</button>
+    </form>
 
             </div>
             <!-- End of Main Content -->
-            <div id="myDialog" style="display: none;" class="px-5 py-3 rounded-3">
-                <h4 class="text-primary fw-bold fs-4">Thông báo</h4>
-                <p class="text-success">{{ session('mes') }}</p>
-                <button id="confirmButton" class="float-end rounded-2">Đồng ý</button>
-            </div>
-            <style>
-                #myDialog {
-                    position: fixed;
-                    width: 500px;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                    background: #ffffff;
-                    padding: 20px;
-                    border: 1px solid #ccc;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-                }
-        
-                #confirmButton {
-                padding: 10px 20px;
-                background: #007bff;
-                color: #ffffff;
-                border: none;
-                cursor: pointer;
-                }
-            </style>
-            @if(session('mes'))
-            <script>
-                var dialog = document.getElementById("myDialog");
-                var confirmButton = document.getElementById("confirmButton");
-    
-                dialog.style.display = "block";
-                confirmButton.addEventListener("click", function() {
-                    dialog.style.display = "none";
-                });
-                // alert("{{ session('Success') }}")
-            </script>
-        @endif
+
         </div>
         <!-- End of Content Wrapper -->
 
@@ -328,3 +285,4 @@
 </body>
 
 </html>
+s
