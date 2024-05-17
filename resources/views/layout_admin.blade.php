@@ -49,44 +49,59 @@
 
             <!-- Chức năng 1 -->
             <li class="nav-item active">
-                <a class="nav-link" href="layout_manage_product">
+                <a class="nav-link" href="{{ route('products.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Quản lí sản phẩm</span></a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
             <!-- Chức năng 2 -->
             <li class="nav-item active">
-                <a class="nav-link" href="layout_manage_category">
+                <a class="nav-link" href="{{ route('categories.index') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Quản lí danh mục</span></a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <!-- Chức năng 3 -->
             <li class="nav-item active">
-                <a class="nav-link" href="{{ route('admin.manage_about_us_information') }}">
+                <a class="nav-link" href="{{ route('admin.orders') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Chỉnh sửa thông tin about us</span></a>
+                    <span>Quản lí đơn hàng</span></a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <!-- Chức năng 4 -->
+            <li class="nav-item active">
+                <a class="nav-link" href="/admin/manage_about_us_information">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Chỉnh sửa About Us</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <!-- Chức năng 5 -->
             <li class="nav-item active">
                 <a class="nav-link" href="{{ route('admin.manage_voucher') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Quản lý mã giảm giá</span></a>
+                    <span>Mã giảm giá</span></a>
             </li>
-
-            <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Chức năng 6 -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('favicon.form') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Chỉnh sửa favicon</span></a>
+            </li>
+            <hr class="sidebar-divider">
+
+            <!-- Chức năng 7 -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('banner.form') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Chỉnh sửa banner</span></a>
+            </li>
+            <hr class="sidebar-divider">
         </ul>
         <!-- End of Sidebar -->
 
@@ -159,8 +174,7 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                    data-target="#logoutModal">
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                     <form method="get" action="{{ route('logout') }}">
                                         @csrf
                                         <button type="submit" class="btn btn-danger">Đăng xuất</button>
@@ -190,26 +204,6 @@
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
     </a>
-
-    <!-- Logout Modal-->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Bootstrap core JavaScript -->
     <script src="vendor/jquery/jquery.min.js"></script>

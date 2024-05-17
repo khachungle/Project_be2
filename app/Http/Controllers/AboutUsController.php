@@ -6,6 +6,7 @@ use Hash;
 use Session;
 use Illuminate\Http\Request;
 use App\Models\About;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class AboutUsController extends Controller
@@ -13,6 +14,9 @@ class AboutUsController extends Controller
     // Phương thức để hiển thị form chỉnh sửa hoặc tạo mới thông tin "About Us"
     public function editOrCreate()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Kiểm tra xem có thông tin "About Us" nào tồn tại trong cơ sở dữ liệu không
         $about = About::first();
 
@@ -23,6 +27,9 @@ class AboutUsController extends Controller
     // Phương thức để cập nhật thông tin "About Us" vào cơ sở dữ liệu
     public function update(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Kiểm tra xem có thông tin "About Us" nào tồn tại trong cơ sở dữ liệu không
         $about = About::firstOrNew();
     
@@ -57,6 +64,9 @@ class AboutUsController extends Controller
 
     public function showAboutUs()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Lấy thông tin "About Us" đầu tiên từ cơ sở dữ liệu
         $about = About::first();
 

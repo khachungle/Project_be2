@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class BannerController extends Controller
 {
     public function showForm()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         return view('admin.change_banner');
     }
 
     public function saveBanner(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $request->validate([
             'banner' => 'required|mimes:png|max:5120', // 5MB
         ]);

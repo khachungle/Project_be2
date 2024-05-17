@@ -3,17 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 
 class FaviconController extends Controller
 {
     public function showForm()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         return view('admin.change_favicon');
     }
 
     public function saveFavicon(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $request->validate([
             'favicon' => 'required|mimes:png|max:5120', // 5MB
         ]);

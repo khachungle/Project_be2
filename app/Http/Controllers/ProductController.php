@@ -7,6 +7,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use App\Models\Products;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -14,6 +15,9 @@ class ProductController extends Controller
 
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $products = Product::all(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
         $categories = Category::all();
         // Đây là số trang hiện tại, nếu bạn cần phân trang
@@ -27,11 +31,17 @@ class ProductController extends Controller
     }
     public function create1()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $categories = Category::all();
         return view('layout_add_product', compact('categories'));
     }
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Validate dữ liệu
         $validatedData = $request->validate([
             'TenSP' => 'required',
@@ -62,6 +72,9 @@ class ProductController extends Controller
     }
     public function destroy($id)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $product = Product::find($id);
 
         if ($product) {
@@ -73,6 +86,9 @@ class ProductController extends Controller
     }
     public function edit1($id)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Lấy thông tin sản phẩm cần sửa
         $product = Product::findOrFail($id);
 
@@ -84,6 +100,9 @@ class ProductController extends Controller
     }
     public function update1(Request $request, $id)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Kiểm tra dữ liệu được gửi từ form
         $validatedData = $request->validate([
             'TenSP' => 'required|max:255',
@@ -118,6 +137,9 @@ class ProductController extends Controller
     }
     public function show($id)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $product = Product::findOrFail($id);
         $categories = Category::all();
         return view('layout_show_product', compact('product', 'categories'));
@@ -126,12 +148,18 @@ class ProductController extends Controller
 
     public function indexProduct()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $categories = Category::all();
         $products = Product::all();
         return view('layout_product', compact('categories', 'products'));
     }
     public function showByCategory($id)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         // Lấy danh mục theo ID
         $category = Category::find($id);
 
@@ -144,6 +172,9 @@ class ProductController extends Controller
     }
     public function search(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $keyword = $request->input('keyword');
 
         // Thực hiện tìm kiếm sản phẩm dựa trên từ khóa
@@ -153,12 +184,13 @@ class ProductController extends Controller
         return view('layout_result_product', ['products' => $products]);
     }
 
-    public function home(){
+    public function home()
+    {
         $products = Product::orderBy('created_at', 'desc') // Sắp xếp theo thời gian tạo mới nhất
-                    ->take(8) // Giới hạn kết quả trả về cho 8 sản phẩm đầu tiên
-                    ->get();
+            ->take(8) // Giới hạn kết quả trả về cho 8 sản phẩm đầu tiên
+            ->get();
 
-        $about= About::first();
+        $about = About::first();
 
         return view('user.home', compact('products', 'about'));
     }

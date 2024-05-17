@@ -5,16 +5,23 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Order;
 use App\Models\OrderItem;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
     public function index()
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         return view('user.checkout');
     }
 
     public function store(Request $request)
     {
+        if (!Auth::check()) {
+            return redirect('login');
+        }
         $request->validate([
             'customer_name' => 'required|string|max:255',
             'customer_address' => 'required|string|max:255',
