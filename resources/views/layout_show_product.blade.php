@@ -62,7 +62,7 @@
             <input type="text" id="product-name" name="product-name" required value="{{ $product->TenSp }}" disabled>
 
             <label for="price">Giá: </label>
-            <input type="number" id="price" name="price" required value="{{$product->Gia}} " disabled>
+            <input type="text" id="price" name="price" required value="{{$product->Gia}} " disabled>
 
             <label for="description">Mô Tả:</label>
             <input type="text" id="product-description" name="product-description" required value="{{ $product->MoTa }}" disabled>

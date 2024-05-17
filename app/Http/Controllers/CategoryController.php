@@ -14,16 +14,12 @@ class CategoryController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $categorys = Category::all(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
+      
 
-        // Đây là số trang hiện tại, nếu bạn cần phân trang
-        $pageIndex = 1;
-
-        // Số lượng trang (nếu bạn sử dụng phân trang)
-        $numberOfPage = 1;
+        $categorys = Category::paginate(3); 
 
         // Trả về view 'products.index' với dữ liệu sản phẩm đã lấy được
-        return view('layout_manage_category', compact('categorys', 'pageIndex', 'numberOfPage'));
+        return view('layout_manage_category', compact('categorys'));
     }
     public function create()
     {

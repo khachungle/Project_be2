@@ -18,16 +18,12 @@ class ProductController extends Controller
         if (!Auth::check()) {
             return redirect('login');
         }
-        $products = Product::all(); // Lấy tất cả sản phẩm từ cơ sở dữ liệu
+      
         $categories = Category::all();
         // Đây là số trang hiện tại, nếu bạn cần phân trang
-        $pageIndex = 1;
-
-        // Số lượng trang (nếu bạn sử dụng phân trang)
-        $numberOfPage = 1;
-
-        // Trả về view 'products.index' với dữ liệu sản phẩm đã lấy được
-        return view('layout_manage_product', compact('products', 'categories', 'pageIndex', 'numberOfPage'));
+        $products = Product::paginate(3); 
+     
+        return view('layout_manage_product', compact('products', 'categories'));
     }
     public function create1()
     {
