@@ -11,6 +11,20 @@ use App\Http\Controllers\BannerController;
 
 Route::get('/layout_admin', function(){
     return view('layout_admin');
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::get('/', function () {
+    return view('user.home');
 });
 Route::get('/layout_manage_product', [ProductController::class, 'index'])->name('products.index');
 Route::get('/layout_add_product', [ProductController::class, 'create1']);
