@@ -63,6 +63,26 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.manage_about_us_information') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Chỉnh sửa thông tin about us</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.manage_voucher') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Quản lý mã giảm giá</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
         </ul>
         <!-- End of Sidebar -->
 
@@ -147,13 +167,6 @@
 
                 {{-- Code riêng ở đây --}}
                 @yield('content')
-
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione rerum provident enim expedita, aut
-                    error recusandae eius porro dignissimos repudiandae ipsam. Quaerat voluptatum harum eius deleniti
-                    dolor expedita similique numquam.</p>
-                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Enim esse totam iste commodi repudiandae
-                    ab, nihil molestias magnam. Vitae non laudantium, libero assumenda veniam debitis enim? In similique
-                    corrupti porro!</p>
 
             </div>
             <!-- End of Main Content -->
