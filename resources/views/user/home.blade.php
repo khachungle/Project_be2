@@ -6,7 +6,7 @@
         <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
             <div class="carousel-inner">
                 <div class="carousel-item active">
-                    <img class="w-100" src="img/carousel-1.jpg" alt="banner">
+                    <img class="w-100" src="{{ asset('img/banner.png') }}" alt="banner">
                     <div class="carousel-caption">
                         <div class="container">
                             <div class="row justify-content-start">

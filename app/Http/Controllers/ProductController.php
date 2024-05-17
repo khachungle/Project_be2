@@ -151,4 +151,8 @@ class ProductController extends Controller
             ->get();
         return view('layout_result_product', ['products' => $products]);
     }
+
+    public function home(){
+        
+    }
 }

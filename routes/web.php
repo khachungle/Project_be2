@@ -9,9 +9,6 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\BannerController;
 
-Route::get('/layout_admin', function(){
-    return view('layout_admin');
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
