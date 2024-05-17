@@ -58,6 +58,10 @@
                     <a href="" class="nav-item nav-link">About Us</a>
                     <a href="layout_products" class="nav-item nav-link">Products</a>
                     <a href="" class="nav-item nav-link">Contact Us</a>
+                    <a href="index.html" class="nav-item nav-link active">Home</a>
+                    <a href="about_us" class="nav-item nav-link">About Us</a>
+                    <a href="product.html" class="nav-item nav-link">Products</a>
+                    <a href="contact.html" class="nav-item nav-link">Contact Us</a>
                 </div>
                 <div class="d-none d-lg-flex ms-2">
                     <a class="btn-sm-square bg-white rounded-circle ms-3" href="">

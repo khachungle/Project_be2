@@ -67,6 +67,26 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
+            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.manage_about_us_information') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Chỉnh sửa thông tin about us</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Chức năng 3 cập nhật thông tin about us -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.manage_voucher') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Quản lý mã giảm giá</span></a>
+            </li>
+            
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
         </ul>
         <!-- End of Sidebar -->
 
