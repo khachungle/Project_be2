@@ -9,6 +9,7 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FaviconController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\AboutUsController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\VoucherController;
 
 /*
@@ -96,3 +97,8 @@ Route::post('add_vouchers', [VoucherController::class, 'VoucherStore'])->name('a
 
 Route::get('Vouchers/{id}/edit', [VoucherController::class, 'VoucherEdit'])->name('admin.edit_voucher');
 Route::put('Vouchers/{id}', [VoucherController::class, 'VoucherUpdate'])->name('admin.update_voucher');
+
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::post('login', [AuthController::class, 'auth'])->name('auth');
+Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+

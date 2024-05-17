@@ -24,7 +24,7 @@
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     @yield('css')
-   
+
 
 </head>
 
@@ -73,7 +73,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Chỉnh sửa thông tin about us</span></a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -83,7 +83,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Quản lý mã giảm giá</span></a>
             </li>
-            
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -159,9 +159,13 @@
                                     Profile
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
+                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                    data-target="#logoutModal">
+                                    <form method="get" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button type="submit" class="btn btn-danger">Đăng xuất</button>
+                                    </form>
+
                                 </a>
                             </div>
                         </li>
@@ -171,7 +175,7 @@
 
                 {{-- Code riêng ở đây --}}
                 @yield('content')
-                
+
 
             </div>
             <!-- End of Main Content -->
