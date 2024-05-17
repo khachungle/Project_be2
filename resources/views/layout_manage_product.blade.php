@@ -244,7 +244,7 @@
                 {{-- Code riêng ở đây --}}
                 @yield('content')
                 <h5 class="danhSach">Danh sách sản phẩm hiện có</h5>
-                <button class="btn_add_product"><a href="layout_add_product">Thêm Sản Phẩm</a></button>
+                <button class="btn_add_product"><a href="{{ url('/layout_add_product') }}">Thêm Sản Phẩm</a></button>
                 <main class="login-form">
                     <div class="container">
 
@@ -253,37 +253,53 @@
                                 <thead>
                                     <tr>
                                         <th>ID</th>
-                                        <th>Danh mục</th>
-                                        <th>Tên sản phẩm</th>
+                                        <th>Tên Sản Phẩm</th>
+                                        <th>Mô Tả</th>
                                         <th>Giá</th>
+                                        <th>Loại Danh Mục</th>
                                         <th>Ảnh</th>
-                                        <th>Mô tả</th>
                                         <th></th>
                                         <th></th>
                                         <th></th>
+                                     
                                     </tr>
                                 </thead>
                                 @foreach ($products as $item)
                                     <tr>
-                                        <th>{{ $item->id }}</th>
-                                        <th>{{ $item->LoaiDanhMuc }}</th>
-                                        <th>{{ $item->TenSp }}</th>
-                                        <th>{{ $item->Gia }}</th>
-                                        <th>{{ $item->AnhMoTa }}</th>
-                                        <th>{{ $item->MoTa }}</th>
-                                        <td><a class="btn btn-success"
-                                                href="{{ route('products.show', ['product' => $item->id]) }}"><i
-                                                    class="fa-regular fa-eye"></i></a></td>
-                                        <td><a class="btn btn-danger"
-                                                href="{{ route('products.edit', ['product' => $item->id]) }}"><i
-                                                    class="fa-regular fa-pen-to-square"></i></a></td>
+                                        <td>{{ $item->id }}</td>
+                                        <td>{{ $item->TenSp }}</td>
+                                        <!-- Giả sử category được lưu trong cột category -->
+                                        <td>{{ $item->MoTa }}</td> <!-- Tên sản phẩm -->
+                                        <td>{{ $item->Gia }}</td> <!-- Giá -->
                                         <td>
-                                            <button class="btn btn-warning" data-bs-toggle='modal'
-                                                data-bs-target='#A{{ $item->id }}'><i
-                                                    class="fa-regular fa-trash-can"></i></button>
+                                            @foreach ($categories as $category)
+                                                @if ($category->id == $item->LoaiDanhMuc)
+                                                    {{ $category->TenDanhMuc }}
+                                                @endif
+                                            @endforeach
+                                        </td> <!-- Giá -->
+                                        <td><img src="{{ $item->AnhMoTa }}" alt="Product Image" style="width: 100px;">
+                                        </td> <!-- Ảnh sản phẩm -->
+                                        <!-- Các nút thao tác -->
+                                        <td>
+                                            <a class="btn btn-success"
+                                                href="{{ route('products.show', $item->id) }}"><i
+                                                    class="fa-regular fa-eye"></i></a>
                                         </td>
+                                       
+                                        <td><a href="{{ route('products.edit', $item->id) }}">Sửa</a></td>
+                                       
+                                        <td>
+                                            <form action="/products/{{ $item->id }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit">Xóa</button>
+                                            </form>
+                                        </td>
+                                        <!-- Modal xác nhận xóa -->
                                         <div class='modal fade' id='A{{ $item->id }}' tabindex='-1'
                                             aria-labelledby='exampleModalLabel' aria-hidden='true'>
+                                            <!-- Nội dung modal -->
                                             <div class='modal-dialog'>
                                                 <div class='modal-content'>
                                                     <div class='modal-header'>
@@ -293,13 +309,13 @@
                                                             data-bs-dismiss='modal' aria-label='Close'></button>
                                                     </div>
                                                     <div class='modal-body'>
-                                                        Bạn có muốn xóa sản phẩm có id: {{ $item->id }}
+                                                        Bạn có muốn xóa sản phẩm có ID: {{ $item->id }}?
                                                     </div>
                                                     <div class='modal-footer'>
                                                         <button type='button' class='btn btn-secondary'
                                                             data-bs-dismiss='modal'>Trở lại</button>
                                                         <form
-                                                            action="{{ route('products.destroy', ['product' => $item->id]) }}"
+                                                            action="{{ route('products.destroy', ['product' => $item->id, 'pageIndex' => $pageIndex]) }}"
                                                             method="POST">
                                                             @csrf
                                                             @method('DELETE')
@@ -320,11 +336,29 @@
 
             </div>
             <!-- End of Main Content -->
+            @if ($numberOfPage > 1)
+                <div class="d-flex justify-content-center align-items-center my-2">
+                    <a class="btn btn-success"
+                        href="{{ route('products.index', ['pageIndex' => $pageIndex - 1]) }}">Trước</a>
+                    @for ($i = 1; $i <= $numberOfPage; $i++)
+                        @if ($pageIndex == $i)
+                            <a class="btn btn-primary ms-2"
+                                href="{{ route('products.index', ['pageIndex' => $i]) }}">{{ $i }}</a>
+                        @else
+                            @if ($i == 1 || $i == $numberOfPage || ($i <= $pageIndex + 4 && $i >= $pageIndex - 4))
+                                <a class="btn btn-success ms-2"
+                                    href="{{ route('products.index', ['pageIndex' => $i]) }}">{{ $i }}</a>
+                            @elseif($i == $pageIndex - 5 || $i == $pageIndex + 5)
+                                <a class="btn btn-success ms-2"
+                                    href="{{ route('products.index', ['pageIndex' => $i]) }}">...</a>
+                            @endif
+                        @endif
+                    @endfor
+                    <a class="btn btn-success ms-2"
+                        href="{{ route('products.index', ['pageIndex' => $pageIndex + 1]) }}">Sau</a>
+                </div>
+            @endif
 
-            <!-- Hiển thị liên kết phân trang -->
-            <div class="d-flex justify-content-center">
-                {{ $products->links() }}
-            </div>
         </div>
         <!-- End of Content Wrapper -->
 
