@@ -4,7 +4,7 @@
      form {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #f9f9f9;

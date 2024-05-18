@@ -4,7 +4,7 @@
      form {
             max-width: 600px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 10px;
             border: 1px solid #ccc;
             border-radius: 10px;
             background-color: #f9f9f9;
@@ -34,14 +34,14 @@
             border: none;
         }
 
-        button {
+        .btn-xoa {
             background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            margin: 25px;
+         
         }
 
         button:hover {
@@ -133,9 +133,9 @@
                             <tr>
                                 <td>{{ $item->id }}</td>
                                 <td>{{ $item->TenDanhMuc }}</td>
-                                <td><a href="{{ route('categories.edit', $item->id) }}">Sửa</a></td>
+                                <td><a class="btn btn-danger" href="{{ route('categories.edit', $item->id) }}">Sửa <i class="fa-regular fa-pen-to-square"></i></a></td>
                                 <td>
-                                    <form action="/categories/{{ $item->id }}" method="POST">
+                                    <form class="btn-xoa" action="/categories/{{ $item->id }}" method="POST">
                                         @csrf
                                         <button type="submit">Xóa</button>
                                     </form>

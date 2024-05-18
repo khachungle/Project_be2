@@ -14,6 +14,10 @@
                     <li class="breadcrumb-item text-dark active" aria-current="page">Products</li>
                 </ol>
             </nav>
+            <form action="{{ route('searchProduct') }}" method="GET">
+                <input class="input" name="keyword" placeholder="Search here...">
+                <button class="search-btn">Search</button>
+            </form>
         </div>
     </div>
     <!-- Page Header End -->
@@ -73,7 +77,9 @@
             </div>
         </div>
     </div>
-
+    <div class="d-flex justify-content-center">
+        {{ $products->links() }}
+    </div>
 @endsection
 
 @section('js')

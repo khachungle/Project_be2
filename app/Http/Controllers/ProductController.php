@@ -148,7 +148,7 @@ class ProductController extends Controller
             return redirect('login');
         }
         $categories = Category::all();
-        $products = Product::all();
+        $products = Product::paginate(8); 
         return view('layout_product', compact('categories', 'products'));
     }
     public function showByCategory($id)
